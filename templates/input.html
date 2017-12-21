@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<form action="/input" method ='post'>
+	<p> Скільки ви потратили?
+    <input type = "text" name = "money"/> </p>
+
+	<select name="User_choice[]" size="16" multiple>
+		<option value="Їжа">Їжа</option>
+		<option value="Одяг">Одяг</option>
+		<option value="Транспорт">Транспорт</option>
+		<option value="Розваги">Розваги</option>
+    <option value="Спорт">Спорт</option>
+	</select>
+    <p></p>
+    <input type="submit" value="Внести" />
+  </form>
+{% endblock %}

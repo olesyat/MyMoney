@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<h1>Категорії</h1>
+<ul class="list-group">
+{% for category in categories %}
+<li class="list-group-item"> <a href='category/{{category.body}}'>{{ category.title }}</a></li>
+
+
+{% endfor %}
+</ul>
+{% endblock %}
