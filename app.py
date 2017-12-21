@@ -36,7 +36,5 @@ def input():
 def view():
     return render_template('view.html', id=id)
 
-print("!!!")
-
 if __name__ == "__main__":
     app.run(debug=True)
