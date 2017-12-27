@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 from data import Categories, Options
+import csv
+import datetime
 
 app = Flask(__name__)
 
@@ -25,10 +27,13 @@ def category(id):
 @app.route('/input', methods = ["POST", "GET"])
 def input():
     if request.method == "POST":
-        dictionary = {'їжа':0}
-        money = request.form['money']
-        value = request.form['User_choice[]']
-        return render_template('true.html', value=value)
+        lst_cat = ['food', 'clothes', 'fun']
+        with open('text.csv', 'a', newline='') as csvfile:
+            swriter = csv.writer(csvfile, delimiter=',')
+            for i in lst_cat:
+                x = [int(e) for e in request.form[i].split()]
+                swriter.writerow([i, sum(x), datetime.datetime.now().strftime("%Y-%m-%d %H:%M")])
+        return render_template('category.html')
     else:
         return render_template('input.html')
 
