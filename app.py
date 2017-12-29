@@ -27,7 +27,7 @@ def category(id):
 @app.route('/input', methods = ["POST", "GET"])
 def input():
     if request.method == "POST":
-        lst_cat = ['food', 'clothes', 'fun']
+        lst_cat = ['food', 'clothes', 'transportation', 'phone', 'fun', 'sport', 'gifts', 'rent', 'utilities', 'travel', 'personalcare', 'health', 'housing', 'supplies', 'education', 'other']
         with open('text.csv', 'a', newline='') as csvfile:
             swriter = csv.writer(csvfile, delimiter=',')
             for i in lst_cat:
