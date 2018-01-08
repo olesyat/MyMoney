@@ -100,7 +100,7 @@ def input():
         with open(FILENAME, 'a', newline='') as csvfile:
             swriter = csv.writer(csvfile, delimiter=',')
             for i in lst_cat:
-                x = [int(e) for e in request.form[i].split()]
+                x = [float(e) for e in request.form[i].split()]
                 swriter.writerow([i, sum(x), datetime.datetime.now().strftime("%Y-%m-%d %H:%M")])
         return render_template('category.html')
     else:
