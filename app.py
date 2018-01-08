@@ -108,7 +108,8 @@ def input():
 
 @app.route('/view')
 def view():
-    return render_template('view.html', id=id)
+    GRAPH_NAME = 'stat.png'
+    return render_template('view.html', graph=GRAPH_NAME)
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
