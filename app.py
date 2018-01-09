@@ -5,8 +5,8 @@ from data import Categories, Options
 import csv
 import datetime
 
-USERNAME = None;
-FILENAME = None;
+USERNAME = None
+FILENAME = None
 app = Flask(__name__)
 
 Categories = Categories()
@@ -29,6 +29,7 @@ google = oauth.remote_app('google',
                           access_token_params={'grant_type': 'authorization_code'},
                           consumer_key=GOOGLE_CLIENT_ID,
                           consumer_secret=GOOGLE_CLIENT_SECRET)
+
 
 def index():
     global USERNAME, FILENAME
@@ -75,7 +76,7 @@ def get_access_token():
 
 @app.route('/')
 def start():
-    return redirect(url_for('login'))
+    return render_template('welcome.html')
 
 @app.route('/home')
 def home():
@@ -108,7 +109,7 @@ def input():
 
 @app.route('/view')
 def view():
-    return render_template('view.html', id=id)
+    return render_template('view.html')
 
 
 
