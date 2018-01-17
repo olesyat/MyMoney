@@ -1,10 +1,9 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-<h1>Категорії</h1>
 <ul class="list-group">
 {% for category in categories %}
-<li class="list-group-item"> <a href='category/{{category.body}}'>{{ category.title }}</a></li>
+    <li class="list-group-item" style="background-color: #456990; border-color: #F45B69; border-width: 5px; position: center; display: inline-block; width: 190px; height: 190px; border-radius: 100px; text-align: center; font-size: 15px; font-family: 'Comic Sans MS'; padding-top: 70px; padding-bottom: 0px; margin: 25px;"> <a href='category/{{category.body}}' style="color: whitesmoke;"><h4>{{ category.title }}</h4></a></li>
 
 
 {% endfor %}
