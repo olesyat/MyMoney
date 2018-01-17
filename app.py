@@ -7,11 +7,9 @@ import datetime
 from hello_graph import do_graph
 import os
 
-
 tanya = 0
-USERNAME = ''
-FILENAME = ''
-
+USERNAME = None
+FILENAME = None
 app = Flask(__name__)
 
 Categories = Categories()
@@ -89,8 +87,6 @@ def start():
 
 @app.route('/home')
 def home():
-    print(USERNAME)
-    print(FILENAME)
     return render_template('home.html', options=Options, name=USERNAME)
 
 
@@ -111,15 +107,10 @@ def category(id):
 
 @app.route('/input', methods=["POST", "GET"])
 def input():
-    global FILENAME
     if request.method == "POST":
-        lst_cat = ['food', 'clothes', 'transportation', 'phone', 'fun', 'sport', 'gifts', 'rent', 'utilities', 'travel', 'personalcare', 'health', 'housing', 'supplies', 'education', 'other']
-        '''print("filename before opening:"+FILENAME)
-        with open(FILENAME, 'a', newline='') as csvfile:
-            swriter = csv.writer(csvfile, delimiter=',')
-            for i in lst_cat:
-                x = [float(e) for e in request.form[i].split()]
-                swriter.writerow([i, sum(x), datetime.datetime.now().strftime("%Y-%m-%d %H:%M")])'''
+        lst_cat = ['food', 'clothes', 'transportation', 'phone', 'fun', 'sport', 'gifts', 'rent', 'utilities', 'travel',
+                   'personalcare', 'health', 'housing', 'supplies', 'education', 'other']
+
         lst = []
         for i in lst_cat:
             x = [float(e) for e in request.form[i].split()]
@@ -131,7 +122,8 @@ def input():
 
 @app.route('/view')
 def view():
-    return render_template('food_s.html', text="Hello, world!")
+    return render_template('food_s.html')
+
 
 if __name__ == "__main__":
     app.run(debug=True)
