@@ -2,28 +2,32 @@
 <html>
 <head>
 <script>
-window.onload = function () {
+window.onload = function() {
 
 var chart = new CanvasJS.Chart("chartContainer", {
-	animationEnabled: true,
+	theme: "light2", // "light1", "light2", "dark1", "dark2"
 	exportEnabled: true,
-	theme: "light1", // "light1", "light2", "dark1", "dark2"
-	title:{
-		text: "Statistics for the current week"
+	animationEnabled: true,
+	title: {
+		text: "Statistics for the week 15.01.2018 - 21.01.2018 "
 	},
 	data: [{
-		type: "column", //change type to bar, line, area, pie, etc
-		//indexLabel: "{y}", //Shows y value on all Data Points
-		indexLabelFontColor: "#5A5757",
-		indexLabelPlacement: "outside",
+		type: "pie",
+		startAngle: 25,
+		toolTipContent: "<b>{label}</b>: {y}%",
+		showInLegend: "true",
+		legendText: "{label}",
+		indexLabelFontSize: 16,
+		indexLabel: "{label} - {y}%",
 		dataPoints: [
-			{ x: 10, y: 71 , indexLabel: "Monday"},
-			{ x: 20, y: 55, indexLabel: "Tuesday" },
-			{ x: 30, y: 50, indexLabel: "Wednesday" },
-			{ x: 40, y: 65, indexLabel: "Thursday" },
-			{ x: 50, y: 92, indexLabel: "Friday" },
-			{ x: 60, y: 68, indexLabel: "Saturday" },
-			{ x: 70, y: 38 , indexLabel: "Sunday"}
+			{ y: 51.08, label: "Food" },
+			{ y: 27.34, label: "Transportation" },
+			{ y: 10.62, label: "Clothes" },
+			{ y: 5.02, label: "Housing" },
+			{ y: 4.07, label: "Others" },
+			{ y: 1.22, label: "Utilities" },
+			{ y: 0.44, label: "Fun" }
+
 		]
 	}]
 });

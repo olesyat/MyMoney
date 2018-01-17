@@ -4,7 +4,10 @@ import json
 from data import Categories, Options
 import csv
 import datetime
+from hello_graph import do_graph
+import os
 
+tanya = 0
 USERNAME = None
 FILENAME = None
 app = Flask(__name__)
@@ -39,7 +42,7 @@ def index():
     access_token = access_token[0]
     from urllib.request import Request, urlopen
     from urllib.error import URLError
-    headers = {'Authorization': 'OAuth '+access_token}
+    headers = {'Authorization': 'OAuth ' + access_token}
     req = Request('https://www.googleapis.com/oauth2/v1/userinfo',
                   None, headers)
     try:
@@ -54,12 +57,13 @@ def index():
     json_obj = json.loads(json_string)
     USERNAME = json_obj['name']
     FILENAME = json_obj['email'][:json_obj['email'].index('@')]
-    FILENAME = str(FILENAME)+'.csv'
+    FILENAME = str(FILENAME) + '.csv'
     return redirect(url_for('home'))
+
 
 @app.route('/login')
 def login():
-    callback=url_for('authorized', _external=True)
+    callback = url_for('authorized', _external=True)
     return google.authorize(callback=callback)
 
 
@@ -70,48 +74,58 @@ def authorized(resp):
     session['access_token'] = access_token, ''
     return index()
 
+
 @google.tokengetter
 def get_access_token():
     return session.get('access_token')
+
 
 @app.route('/')
 def start():
     return render_template('welcome.html')
 
+
 @app.route('/home')
 def home():
     return render_template('home.html', options=Options, name=USERNAME)
+
 
 @app.route('/about')
 def about():
     return render_template('about.html')
 
+
 @app.route('/categories')
 def categories():
-    return render_template('categories.html', categories = Categories)
+    return render_template('categories.html', categories=Categories)
+
 
 @app.route('/category/<string:id>/')
 def category(id):
-    return render_template('category.html', id=id)
+    return render_template('new_s.html', id=id)
 
-@app.route('/input', methods = ["POST", "GET"])
+
+@app.route('/input', methods=["POST", "GET"])
 def input():
     if request.method == "POST":
-        lst_cat = ['food', 'clothes', 'transportation', 'phone', 'fun', 'sport', 'gifts', 'rent', 'utilities', 'travel', 'personalcare', 'health', 'housing', 'supplies', 'education', 'other']
+        lst_cat = ['food', 'clothes', 'transportation', 'phone', 'fun', 'sport', 'gifts', 'rent', 'utilities', 'travel',
+                   'personalcare', 'health', 'housing', 'supplies', 'education', 'other']
+        '''
         with open(FILENAME, 'a', newline='') as csvfile:
             swriter = csv.writer(csvfile, delimiter=',')
             for i in lst_cat:
                 x = [float(e) for e in request.form[i].split()]
                 swriter.writerow([i, sum(x), datetime.datetime.now().strftime("%Y-%m-%d %H:%M")])
+'''
         return render_template('category.html')
     else:
         return render_template('input.html')
 
+
 @app.route('/view')
 def view():
-    return render_template('view.html')
-
+    return render_template('food_s.html')
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
